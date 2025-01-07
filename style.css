@@ -1,4 +1,4 @@
-﻿/* Основные стили */
+/* Основные стили */
 body {
     background-color: #121212;
     margin: 0;
@@ -89,6 +89,19 @@ header table {
 .player-table th {
     background-color: #333;
     color: #E0E0E0;
+}
+
+/* Стили для убитого, голосованного и удаленного игрока */
+.player.killed {
+    background-color: #ffcccc; /* Бледно красный фон */
+}
+
+.player.voted {
+    background-color: #e0b3ff; /* Фиолетовый фон */
+}
+
+.player.deleted {
+    background-color: #ff3333; /* Ярко красный фон */
 }
 
 .number p {
@@ -308,7 +321,7 @@ button:hover {
     width: 100%;
     align-items: center;
 }
-/* Добавляем стили для элементов в нижней части таблицы */
+
 /* Добавляем стили для элементов в нижней части таблицы */
 .game-info-footer {
     text-align: center;
@@ -327,6 +340,7 @@ button:hover {
 button {
     margin: 0;
 }
+
 .material-you-button {
     background-color: #d32f2f; /* Красный цвет */
     color: white;
@@ -345,4 +359,8 @@ button {
 .material-you-button:active {
     background-color: #f44336; /* Цвет активной кнопки */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.player-table tfoot button {
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
