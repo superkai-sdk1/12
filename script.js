@@ -77,6 +77,15 @@ function changeStatus(object, status) {
         element.classList.remove(status);
         element.classList.remove('dead');
 
+        // Удаляем цвет фона для убитых, голосованных и удаленных игроков
+        if (status === 'killed') {
+            element.style.backgroundColor = '';
+        } else if (status === 'voted') {
+            element.style.backgroundColor = '';
+        } else if (status === 'deleted') {
+            element.style.backgroundColor = '';
+        }
+
         // Если это первый убитый игрок, удаляем ЛХ
         if (status === 'killed' && !isFirstKill) {
             cl.postMessage(`${element.id}|${element.classList.value}|remove-best-move`);
@@ -89,6 +98,15 @@ function changeStatus(object, status) {
             element.classList.add('dead');
         }
         element.classList.add(status);
+
+        // Добавляем цвет фона для убитых, голосованных и удаленных игроков
+        if (status === 'killed') {
+            element.style.backgroundColor = 'rgba(255, 0, 0, 0.2)'; // Pale red background for killed players
+        } else if (status === 'voted') {
+            element.style.backgroundColor = 'rgba(128, 0, 128, 0.2)'; // Purple background for voted players
+        } else if (status === 'deleted') {
+            element.style.backgroundColor = 'rgba(255, 0, 0, 0.8)'; // Bright red background for deleted players
+        }
 
         // Если это первое убийство, открываем модальное окно для ввода ЛХ
         if (status === 'killed' && isFirstKill) {
@@ -114,6 +132,7 @@ function clearStatus() {
     // Сброс статусов игроков
     document.querySelectorAll('.killed, .voted, .deleted, .dead').forEach(item => {
         item.classList.remove('killed', 'voted', 'deleted', 'dead');
+        item.style.backgroundColor = ''; // Удаляем цвет фона
     });
 
     // Сброс Лучшего хода (ЛХ)
@@ -175,44 +194,21 @@ $('#game-number-input').on('input', function () {
 function highlightSpeaker(playerNumber) {
     ps.postMessage(`highlight|player_${playerNumber}`);
 }
-// Обработчик изменения игровой фазы
-$('#game-phase-select').on('change', function () {
-    const phase = $(this).val();
-    gp.postMessage(phase); // Отправляем выбранную фазу на оверлей
-});
 
 function showBestMoveModal(playerId) {
     const modal = document.getElementById('best-move-modal');
-    modal.style.display = 'block';
+    const numberButtonsContainer = modal.querySelector('.number-buttons-container');
+    numberButtonsContainer.innerHTML = ''; // Clear any existing buttons
 
-    const closeBtn = modal.querySelector('.close');
-    closeBtn.onclick = function () {
-        modal.style.display = 'none';
-    };
-
-    const saveBtn = modal.querySelector('#save-best-move');
-    saveBtn.onclick = function () {
-        const bestMove = document.getElementById('best-move-input').value;
-        if (bestMove) {
-            console.log("Отправка ЛХ:", `${playerId}|${document.getElementById(playerId).classList.value}|best-move|${bestMove}`);
-            cl.postMessage(`${playerId}|${document.getElementById(playerId).classList.value}|best-move|${bestMove}`);
-            modal.style.display = 'none';
-        }
-    };
-}
-let selectedNumbers = [];
-
-function selectNumber(number) {
-    if (selectedNumbers.length < 3) {
-        selectedNumbers.push(number);
-        document.querySelectorAll('.number-button')[number - 1].classList.add('selected-number');
-    } else {
-        alert("Вы можете выбрать только три цифры.");
+    // Create number buttons from 1 to 10
+    for (let i = 1; i <= 10; i++) {
+        const button = document.createElement('button');
+        button.classList.add('number-button');
+        button.textContent = i;
+        button.onclick = () => selectNumber(i);
+        numberButtonsContainer.appendChild(button);
     }
-}
 
-function showBestMoveModal(playerId) {
-    const modal = document.getElementById('best-move-modal');
     modal.style.display = 'block';
 
     const closeBtn = modal.querySelector('.close');
@@ -235,4 +231,15 @@ function showBestMoveModal(playerId) {
             alert("Пожалуйста, выберите три цифры.");
         }
     };
+}
+
+let selectedNumbers = [];
+
+function selectNumber(number) {
+    if (selectedNumbers.length < 3) {
+        selectedNumbers.push(number);
+        document.querySelector(`.number-button:nth-child(${number})`).classList.add('selected-number');
+    } else {
+        alert("Вы можете выбрать только три цифры.");
+    }
 }
