@@ -1,0 +1,348 @@
+﻿/* Основные стили */
+body {
+    background-color: #121212;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #E0E0E0;
+}
+
+/* Центровка кнопки загрузки файла */
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: #1F1F1F;
+    color: #E0E0E0;
+    padding: 10px;
+    text-align: center;
+}
+
+header.hidden {
+    display: none; /* Скрываем заголовок */
+}
+
+header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+header .welcome-message {
+    font-size: 16px;
+    margin-bottom: 20px;
+    max-width: 600px;
+}
+
+header input[type="file"] {
+    display: none;
+}
+
+header label {
+    background-color: #333;
+    color: #E0E0E0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+header label:hover {
+    background-color: #444;
+}
+
+header table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Основная часть */
+.main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px 0;
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    display: none; /* Скрываем по умолчанию */
+}
+
+/* Таблица игроков */
+.player-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 14px;
+}
+
+.player-table th, .player-table td {
+    padding: 5px;
+    border-bottom: 1px solid #444;
+}
+
+.player-table th {
+    background-color: #333;
+    color: #E0E0E0;
+}
+
+.number p {
+    margin: 0;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    background-color: #444;
+    border-radius: 50%;
+    line-height: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.number p:hover {
+    background-color: #6200ea;
+}
+
+/* Поля ввода и списки игроков */
+input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #E0E0E0;
+    background-color: #333;
+    margin-top: 5px;
+}
+
+/* Кнопки */
+button {
+    margin-top: 5px;
+    padding: 8px 16px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #E0E0E0;
+    background-color: #6200ea;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3700b3;
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #1E1E1E;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal .close:hover,
+.modal .close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #E0E0E0;
+}
+
+.modal button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #6200ea;
+    border: none;
+    border-radius: 5px;
+    color: #E0E0E0;
+    cursor: pointer;
+}
+
+.modal button:hover {
+    background-color: #3700b3;
+}
+
+/* Кнопки со статусами */
+.s-button {
+    background-color: rgba(66, 66, 66, 0);
+    width: 24px;
+    height: 24px;
+    padding: 0 5px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.s-button div {
+    height: 24px;
+    width: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    background-color: rgba(224, 224, 224, 0.9);
+}
+
+.s-button:hover div {
+    background-color: rgba(224, 224, 224, 1);
+}
+
+.s-button.killed-button div {
+    background-image: url("content/icon/killed.png");
+}
+
+.s-button.voted-button div {
+    background-image: url("content/icon/voted.png");
+}
+
+.s-button.deleted-button div {
+    background-image: url("content/icon/deleted.png");
+}
+
+.s-button.don-button div {
+    background-image: url("content/icon/don.png");
+}
+
+.s-button.mafia-button div {
+    background-image: url("content/icon/mafia.png");
+}
+
+.s-button.sheriff-button div {
+    background-image: url("content/icon/sheriff.png");
+}
+
+.killed .s-button.killed-button div,
+.voted .s-button.voted-button div,
+.deleted .s-button.deleted-button div,
+.don .s-button.don-button div,
+.mafia .s-button.mafia-button div,
+.sheriff .s-button.sheriff-button div {
+    background-color: rgb(174, 82, 221);
+}
+
+/* Стили для кнопок выбора цифр */
+.number-button {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #E0E0E0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.number-button:hover {
+    background-color: #444;
+}
+
+.selected-number {
+    background-color: #6200ea;
+}
+
+/* Обновление стилей для модального окна */
+.modal-content {
+    background-color: #1E1E1E;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal .number-buttons-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* Стили для информации о игре */
+#game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+    align-items: center;
+}
+/* Добавляем стили для элементов в нижней части таблицы */
+/* Добавляем стили для элементов в нижней части таблицы */
+.game-info-footer {
+    text-align: center;
+    padding: 10px;
+}
+
+.game-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#game-number-input,
+#game-phase-select,
+button {
+    margin: 0;
+}
+.material-you-button {
+    background-color: #d32f2f; /* Красный цвет */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.material-you-button:hover {
+    background-color: #b71c1c; /* Темный красный цвет при наведении */
+}
+
+.material-you-button:active {
+    background-color: #f44336; /* Цвет активной кнопки */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}

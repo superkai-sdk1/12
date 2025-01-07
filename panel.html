@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Панель</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<header class="centered">
+    <div class="welcome-message">
+        <h1>Добро пожаловать!</h1>
+        <p>Пожалуйста, выбери TXT файл со списком игроков. Никнеймы в списке должны быть полностью идентичны названиям фотографий игроков. Не забудь закинуть фотографии по пути /content/photo/. После завершения игры нажми кнопку "Обновить".</p>
+    </div>
+    <label for="fileToLoad" id="uploadFileLabel">Загрузить файл</label>
+    <input type="file" name="file" id="fileToLoad" accept=".txt" onchange="loadFileAsText()">
+</header>
+<div class="main">
+    <table class="player-table">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Никнейм</th>
+            <th colspan="3">Статус</th>
+            <th></th>
+            <th colspan="3">Роль</th>
+        </tr>
+        </thead>
+        <tbody id="player-rows"></tbody>
+        <tfoot>
+        <tr>
+            <td></td>
+            <td><button onclick="sendAllData()">Отправить</button></td>
+            <td colspan="3"><button onclick="clearStatus()">Сбросить</button></td>
+            <td></td>
+            <td colspan="3"><button onclick="clearRole()">Сбросить</button></td>
+        </tr>
+        <tr>
+            <td colspan="9" class="game-info-footer">
+                <div class="game-info-container">
+                    <input type="text" id="game-number-input" placeholder="ИГРА x / y">
+                    <select id="game-phase-select">
+                        <option value="Раздача ролей">Раздача ролей</option>
+                        <option value="Договорка Мафии">Договорка Мафии</option>
+                        <option value="Свободная посадка">Свободная посадка</option>
+                        <option value="День">День</option>
+                        <option value="Ночь">Ночь</option>
+                        <option value="Дон ищет Шерифа">Дон ищет Шерифа</option>
+                        <option value="Шериф ищет Мафию">Шериф ищет Мафию</option>
+                    </select>
+                    <button class="material-you-button" onclick="location.reload()">Обновить</button>
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

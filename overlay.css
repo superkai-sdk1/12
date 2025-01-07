@@ -1,0 +1,363 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    line-height: 0;
+    font-family: 'Manrope', sans-serif;
+    line-height: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1.5s, opacity 1.5s linear;
+}
+
+body.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.player {
+    margin: 0 0.625%;
+    width: 8.6%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: none; /* Удаление тени */
+    background-color: transparent; /* Убедитесь, что фон прозрачный */
+    transition: margin-top 1.5s, box-shadow 1.5s, transform 0.3s;
+    padding-bottom: 22px; /* Добавляем отступ внизу для черного фона */
+}
+
+.player::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 22px; /* Высота черного фона */
+    background-color: #000; /* Черный цвет фона */
+}
+
+.player.dead {
+    margin-top: 1.5%;
+}
+
+.speaker {
+    box-shadow: 0 2px 15px rgba(175, 82, 222, 0.9), 0 2px 7px rgba(175, 82, 222, 0.5);
+    transform: scale(1.1);
+}
+
+
+/* Обновленные стили для фото, чтобы убрать градиент */
+.photo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    box-shadow: none; /* Удаление тени */
+    background-color: transparent; /* Убедитесь, что фон прозрачный */
+    transition: all 1s;
+}
+
+.dead .photo {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+/* Центрируем статус наверху контейнера */
+.status {
+    position: absolute;
+    top: 5px; /* Размещаем сверху контейнера */
+    left: 50%; /* Центрируем по горизонтали */
+    transform: translateX(-50%); /* Центрируем по горизонтали */
+    width: auto;
+    height: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1.5s, opacity 1.5s linear;
+    color: #ffffff; /* Цвет текста */
+    font-size: 14px; /* Размер текста */
+    text-align: center; /* Центрируем текст */
+}
+
+.killed .status, .voted .status, .deleted .status {
+    visibility: visible;
+    opacity: 1;
+    background-color: transparent; /* Убираем фон */
+    border-radius: 0; /* Убираем закругления */
+}
+
+
+.bg {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    background-image: url("content/icon/red_bg.png");
+}
+
+.role {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1.5s, opacity 1.5s linear;
+}
+
+.show-roles .sheriff .role {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgb(0, 0, 0);
+    background-image: url("content/icon/loupe.png");
+}
+
+.show-roles .sheriff .bg {
+    background-image: url("content/icon/sher_bg.png");
+}
+
+.show-roles .don .role {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url("content/icon/hat.png");
+}
+
+.show-roles .don .bg {
+    background-image: url("content/icon/don_bg.png");
+}
+
+.show-roles .mafia .role {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url("content/icon/gun.png");
+}
+
+.show-roles .mafia .bg {
+    background-image: url("content/icon/black_bg.png");
+}
+
+.number {
+    position: absolute;
+    left: 6px;
+    bottom: 10px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    background-color: transparent; /* Сделать фон прозрачным */
+    border: none; /* Убрать границу */
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 25px;
+    transition: background-color 1.5s, border 1.5s;
+    z-index: 1000;
+}
+
+.show-roles .mafia .number,
+.show-roles .don .number {
+    color: #fff;}
+
+.nick {
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%); /* Центрирование по горизонтали */
+    color: #fff;
+    font-size: 14px;
+    background-color: transparent; /* Убедитесь, что фон прозрачный */
+    text-align: center; /* Центрирование текста */
+    z-index: 1000;
+}
+/* Новые стили для анимации подсветки */
+.highlight {
+    border: 4px solid transparent;
+    border-radius: 10px;
+    animation: highlight-animation 3s linear infinite;
+}
+
+@keyframes highlight-animation {
+    0% {
+        border-color: rgba(175, 82, 222, 0);
+    }
+
+    25% {
+        border-color: rgba(175, 82, 222, 0.5);
+    }
+
+    50% {
+        border-color: rgba(175, 82, 222, 1);
+    }
+
+    75% {
+        border-color: rgba(175, 82, 222, 0.5);
+    }
+
+    100% {
+        border-color: rgba(175, 82, 222, 0);
+    }
+}
+
+@keyframes gradient-animation {
+    0% {
+        border-image: linear-gradient(45deg, rgba(175, 82, 222, 1), rgba(175, 82, 222, 0.5)) 1;
+    }
+
+    50% {
+        border-image: linear-gradient(45deg, rgba(82, 222, 175, 1), rgba(82, 222, 175, 0.5)) 1;
+    }
+
+    100% {
+        border-image: linear-gradient(45deg, rgba(175, 82, 222, 1), rgba(175, 82, 222, 0.5)) 1;
+    }
+}
+
+.game-info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: rgb(31, 30, 31);
+    color: white;
+    font-size: 24px;
+    border-radius: 15px;
+    font-family: 'Manrope', sans-serif;
+    animation: speaker-animation 5s ease-in-out infinite;
+    transform-origin: center; /* Добавлено */
+}
+
+.game-phase-panel {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: rgb(31, 30, 31);
+    color: white;
+    font-size: 24px;
+    border-radius: 20px;
+    font-family: 'Manrope', sans-serif;
+    animation: speaker-animation 5s ease-in-out infinite;
+    transform-origin: center; /* Добавлено */
+}
+
+.animate-phase {
+    animation: phase-animation 0.5s ease-in-out;
+}
+
+@keyframes phase-animation {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+@keyframes speaker-animation {
+    0% {
+        box-shadow: 0 2px 15px rgba(175, 82, 222, 0.9), 0 2px 7px rgba(175, 82, 222, 0.5);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(175, 82, 222, 1), 0 4px 10px rgba(175, 82, 222, 0.7);
+    }
+    100% {
+        box-shadow: 0 2px 15px rgba(175, 82, 222, 0.9), 0 2px 7px rgba(175, 82, 222, 0.5);
+    }
+}
+
+/* Стили для панели статуса */
+.status-panel {
+    position: absolute;
+    top: -830px; /* Отступ сверху 20px */
+    right: 20px; /* Отступ справа 20px */
+    padding: 10px 20px;
+    background-color: rgb(31, 30, 31);
+    color: white;
+    font-size: 24px;
+    border-radius: 15px;
+    font-family: 'Manrope', sans-serif;
+    animation: speaker-animation 5s ease-in-out infinite;
+    z-index: 10; /* Убедимся, что панель находится поверх других элементов */
+}
+
+.status-line {
+    display: flex; /* Используем flexbox для расположения элементов в одну строку */
+    align-items: center; /* Выравниваем элементы по центру по вертикали */
+    gap: 10px; /* Отступ между элементами */
+}
+
+.icon {
+    width: 24px; /* Размер иконки */
+    height: 24px; /* Размер иконки */
+    background-size: cover; /* Масштабируем иконку */
+    background-position: center; /* Центрируем иконку */
+}
+
+.killed-icon {
+    background-image: url("content/icon/killed.png"); /* Иконка для "Убили" */
+}
+
+.voted-icon {
+    background-image: url("content/icon/voted.png"); /* Иконка для "Заголосовали" */
+}
+
+.best-move {
+    position: absolute;
+    top: 25px;
+    right: 1px;
+    width: 20px;
+    text-align: center;
+    align-items: left;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 18px;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+    margin-top: 1px;
+    border: 1px solid white; /* Добавляем белую рамку */
+}
+
+.best-move-label {
+    font-size: 14px; /* Размер текста для надписи "ЛХ" */
+    font-weight: bold; /* Жирный текст для надписи "ЛХ" */
+    margin-bottom: 5px; /* Отступ снизу для надписи "ЛХ" */
+}
+
+.best-move-number {
+    margin: 5px 0;
+}
+
